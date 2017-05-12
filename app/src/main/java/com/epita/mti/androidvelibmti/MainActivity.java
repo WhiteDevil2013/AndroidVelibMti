@@ -1,11 +1,13 @@
 package com.epita.mti.androidvelibmti;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +30,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         VelibService velibService = buildService();
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
@@ -64,5 +70,11 @@ public class MainActivity extends AppCompatActivity {
                         addConverterFactory(GsonConverterFactory.create()).build();
         VelibService velibService = retrofit.create(VelibService.class);
         return velibService;
+    }
+
+    public void showAuthors(View view)
+    {
+        Intent intent = new Intent(MainActivity.this, AuthorsActivity.class);
+        startActivity(intent);
     }
 }

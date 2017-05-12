@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingTop="20dp"
+        android:textColor="@color/colorAccent"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        tools:text="@string/authors" />
+
+    <LinearLayout
+        android:id="@+id/OverAllLinear"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:id="@+id/linearLayoutUserOne"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical|start"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/RelativeLayoutUserOne"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical">
+
+                <LinearLayout
+                    android:id="@+id/LinearDetailUserOne"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/imageViewUserOne"
+                        android:layout_width="match_parent"
+                        android:layout_height="120dp"
+                        android:gravity="center"
+                        app:srcCompat="@mipmap/hadrien" />
+
+                    <TextView
+                        android:id="@+id/UserOneName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/authorOne"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayoutUserTwo"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:orientation="vertical">
+
+            <RelativeLayout android:id="@+id/RelativeLayoutUserTwo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                xmlns:android="http://schemas.android.com/apk/res/android">
+
+                <LinearLayout
+                    android:id="@+id/LinearDetailUserTwo"
+                    android:layout_width="match_parent"
+                    android:layout_centerInParent="true"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/imageViewUserTwo"
+                        android:layout_width="match_parent"
+                        android:layout_height="120dp"
+                        android:gravity="center"
+                        app:srcCompat="@mipmap/william" />
+
+                    <TextView
+                        android:id="@+id/UserTwoName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/authorTwo"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
