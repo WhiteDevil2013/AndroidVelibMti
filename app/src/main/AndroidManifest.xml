@@ -18,7 +18,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AuthorsActivity"/>
+        <activity android:name=".Authors.AuthorsActivity"/>
+        <activity android:name=".PageViewer.ViewPagerActivity"/>
     </application>
 
 </manifest>

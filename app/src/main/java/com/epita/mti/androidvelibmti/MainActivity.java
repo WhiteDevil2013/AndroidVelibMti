@@ -8,6 +8,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.epita.mti.androidvelibmti.Authors.AuthorsActivity;
+
 import java.util.ArrayList;
 import java.util.List;
 

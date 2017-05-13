@@ -17,15 +17,20 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|enterAlways" >
+            app:layout_scrollFlags="scroll|enterAlways">
 
-            <android.support.v7.widget.AppCompatButton
+            <ImageButton
+                android:id="@+id/ImageButton01"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:background="@android:color/transparent"
+                android:padding="20dp"
                 android:onClick="showAuthors"
-                android:text="@string/authors"/>
+                android:src="@drawable/ic_info_outline_white_48px" />
 
-            </android.support.v7.widget.Toolbar>
+
+        </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
 
