@@ -5,11 +5,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.epita.mti.androidvelibmti.Authors.AuthorsActivity;
-import com.epita.mti.androidvelibmti.PageViewer.ViewPagerActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
     private VelibAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private ArrayList<String> strings = new ArrayList<String>();
+
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +67,53 @@ public class MainActivity extends AppCompatActivity {
             public void onFailure(Call<List<Station>> call, Throwable t) {
             }
         });
+
+
+        initToolBar();
+    }
+
+
+    public void initToolBar() {
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+
+        SearchView searchView = null;
+        if (searchItem != null) {
+            searchView = (SearchView) searchItem.getActionView();
+        }
+        if (searchView != null) {
+            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String query) {
+                    mAdapter.filter(query);
+                    return true;
+                }
+
+                @Override
+                public boolean onQueryTextChange(String newText) {
+                    mAdapter.filter(newText);
+                    return true;
+                }
+            });
+        }
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.authors:
+                showAuthors();
+                break;
+        }
+        return true;
     }
 
     private VelibService buildService()
@@ -75,9 +125,11 @@ public class MainActivity extends AppCompatActivity {
         return velibService;
     }
 
-    public void showAuthors(View view)
+    public void showAuthors()
     {
         Intent intent = new Intent(MainActivity.this, AuthorsActivity.class);
         startActivity(intent);
     }
+
+
 }

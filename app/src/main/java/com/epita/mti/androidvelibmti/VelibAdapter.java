@@ -18,6 +18,7 @@ import java.util.ArrayList;
 
 public class VelibAdapter extends RecyclerView.Adapter<VelibAdapter.ViewHolder> {
     private ArrayList<String> mDataset;
+    private ArrayList<String> filteredData;
     private static Context context;
 
     static class ViewHolder extends RecyclerView.ViewHolder {
@@ -31,7 +32,9 @@ public class VelibAdapter extends RecyclerView.Adapter<VelibAdapter.ViewHolder> 
 
     public VelibAdapter(ArrayList<String> myDataset) {
         mDataset = myDataset;
+        filteredData = myDataset;
     }
+
     @Override
     public VelibAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_view, parent, false);
@@ -39,7 +42,7 @@ public class VelibAdapter extends RecyclerView.Adapter<VelibAdapter.ViewHolder> 
     }
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.mTextView.setText(mDataset.get(position));
+        holder.mTextView.setText(filteredData.get(position));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -49,12 +52,28 @@ public class VelibAdapter extends RecyclerView.Adapter<VelibAdapter.ViewHolder> 
     }
     @Override
     public int getItemCount() {
-        return mDataset.size();
+        return filteredData.size();
     }
 
     public void showDetail()
     {
         Intent intent = new Intent(context, ViewPagerActivity.class);
         context.startActivity(intent);
+    }
+
+    public void filter(String text) {
+        ArrayList<String> tmpList = new ArrayList<>();
+        if(text.isEmpty()){
+            tmpList.addAll(mDataset);
+        } else{
+            text = text.toLowerCase();
+            for(String item: mDataset){
+                if(item.toLowerCase().contains(text)){
+                    tmpList.add(item);
+                }
+            }
+        }
+        filteredData = tmpList;
+        notifyDataSetChanged();
     }
 }
