@@ -39,6 +39,4 @@
         android:layout_width="368dp"
         android:layout_height="match_parent" />
 
-
-
 </LinearLayout>

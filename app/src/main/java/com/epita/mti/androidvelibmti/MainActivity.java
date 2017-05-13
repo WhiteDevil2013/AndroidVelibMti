@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.epita.mti.androidvelibmti.Authors.AuthorsActivity;
+import com.epita.mti.androidvelibmti.PageViewer.ViewPagerActivity;
 
 import java.util.ArrayList;
 import java.util.List;

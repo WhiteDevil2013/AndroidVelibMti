@@ -1,10 +1,14 @@
 package com.epita.mti.androidvelibmti;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.epita.mti.androidvelibmti.PageViewer.ViewPagerActivity;
 
 import java.util.ArrayList;
 
@@ -14,11 +18,14 @@ import java.util.ArrayList;
 
 public class VelibAdapter extends RecyclerView.Adapter<VelibAdapter.ViewHolder> {
     private ArrayList<String> mDataset;
+    private static Context context;
+
     static class ViewHolder extends RecyclerView.ViewHolder {
         private TextView mTextView;
         public ViewHolder(View v) {
             super(v);
-            mTextView = (TextView) v.findViewById(R.id.textView2);
+            context = itemView.getContext();
+            mTextView = (TextView) v.findViewById(R.id.textTitle);
         }
     }
 
@@ -33,10 +40,21 @@ public class VelibAdapter extends RecyclerView.Adapter<VelibAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.mTextView.setText(mDataset.get(position));
-
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDetail();
+            }
+        });
     }
     @Override
     public int getItemCount() {
         return mDataset.size();
+    }
+
+    public void showDetail()
+    {
+        Intent intent = new Intent(context, ViewPagerActivity.class);
+        context.startActivity(intent);
     }
 }
