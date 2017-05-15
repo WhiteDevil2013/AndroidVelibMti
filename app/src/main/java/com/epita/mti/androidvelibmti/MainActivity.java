@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -43,28 +44,30 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
+
         mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         mAdapter = new VelibAdapter(strings);
         recyclerView.setAdapter(mAdapter);
 
-        Call<List<Station>> repoList = velibService.listStation();
-        repoList.enqueue(new Callback<List<Station>>() {
+        Call<VelibObject> repoList = velibService.listStation();
+        repoList.enqueue(new Callback<VelibObject>() {
             @Override
-            public void onResponse(Call<List<Station>> call, Response<List<Station>> response) {
+            public void onResponse(Call<VelibObject> call, Response<VelibObject> response) {
                 if(response.isSuccessful()) {
-                    List<Station> repoList = response.body();
+                    VelibObject repoList = response.body();
 
-                    for (Station tuto : repoList) {
-                        strings.add(tuto.getAuteur());
+                    for (StationInfo tuto : repoList.getRecords()) {
+                        strings.add(tuto.getFields().getName());
                     }
                     mAdapter.notifyDataSetChanged();
                 } else {
-                    //Error
+                    Log.d("HADRIEN", "error");
                 }
             }
             @Override
-            public void onFailure(Call<List<Station>> call, Throwable t) {
+            public void onFailure(Call<VelibObject> call, Throwable t) {
+                Log.d("HADRIEN", "error");
             }
         });
 

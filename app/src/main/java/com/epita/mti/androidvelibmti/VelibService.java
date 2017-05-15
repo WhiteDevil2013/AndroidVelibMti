@@ -10,9 +10,9 @@ import retrofit2.http.GET;
  */
 
 public interface VelibService {
-    String ENDPOINT = "http://www.tutos-android.com/";
+    String ENDPOINT = "https://opendata.paris.fr/";
 
-    @GET("MTI/2018/TP3.json")
-    Call<List<Station>> listStation();
+    @GET("api/records/1.0/search/?dataset=stations-velib-disponibilites-en-temps-reel&rows=100&facet=banking&facet=bonus&facet=status&facet=contract_name")
+    Call<VelibObject> listStation();
 
 }
