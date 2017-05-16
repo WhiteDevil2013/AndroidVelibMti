@@ -115,9 +115,6 @@ public class MainActivity extends AppCompatActivity {
             case R.id.authors:
                 showAuthors();
                 break;
-            case R.id.mapViewer:
-                showMap();
-                break;
         }
         return true;
     }
@@ -136,10 +133,4 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, AuthorsActivity.class);
         startActivity(intent);
     }
-
-    public void showMap() {
-        Intent intent = new Intent(MainActivity.this, MapsActivity.class);
-        startActivity(intent);
-    }
-
 }

@@ -1,5 +1,6 @@
 package com.epita.mti.androidvelibmti.PageViewer;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -7,9 +8,12 @@ import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.epita.mti.androidvelibmti.DBO.Station;
+import com.epita.mti.androidvelibmti.MainActivity;
+import com.epita.mti.androidvelibmti.MapsActivity;
 import com.epita.mti.androidvelibmti.R;
 
 import java.text.ParseException;
@@ -31,6 +35,7 @@ public class PlaceholderFragment extends Fragment {
     TextView mTextViewBikeTotal;
     TextView mTextViewBikeAvailable;
     TextView mTextViewStatus;
+    LinearLayout mLocationPart;
 
     public static PlaceholderFragment create(Station station) {
         PlaceholderFragment fragment = new PlaceholderFragment();
@@ -62,6 +67,16 @@ public class PlaceholderFragment extends Fragment {
         mTextViewBikeAvailable = (TextView)rootView.findViewById(R.id.bikeStatsTextAvailable);
         mTextViewStatus = (TextView)rootView.findViewById(R.id.Status);
 
+        mLocationPart = (LinearLayout) rootView.findViewById(R.id.LocationPart);
+        mLocationPart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showMap(mStation.getPosition().get(0),
+                        mStation.getPosition().get(1),
+                        mStation.getName());
+            }
+        });
+
         mTextViewName.setText(String.valueOf(mStation.getName()));
 
         if (mStation.getStatus().equals("CLOSED")) {
@@ -83,6 +98,7 @@ public class PlaceholderFragment extends Fragment {
                 dateFormat = new StringBuilder(dateFormat).replace(ind, ind + 1, "").toString();
             }
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz");
+            // UTC == GMT
             sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
             long time = 0;
             time = sdf.parse(String.valueOf(dateFormat)).getTime();
@@ -110,6 +126,16 @@ public class PlaceholderFragment extends Fragment {
 
 
         return rootView;
+    }
+
+
+
+    public void showMap(Double latitude, Double longitude, String Name) {
+        Intent intent = new Intent(getActivity(), MapsActivity.class);
+        intent.putExtra("LATITUDE", latitude);
+        intent.putExtra("LONGITUDE", longitude);
+        intent.putExtra("NAME", Name);
+        startActivity(intent);
     }
 
 }

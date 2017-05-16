@@ -12,7 +12,7 @@ import retrofit2.http.GET;
 public interface VelibService {
     String ENDPOINT = "https://opendata.paris.fr/";
 
-    @GET("api/records/1.0/search/?dataset=stations-velib-disponibilites-en-temps-reel&rows=10&facet=banking&facet=bonus&facet=status&facet=contract_name")
+    @GET("api/records/1.0/search/?dataset=stations-velib-disponibilites-en-temps-reel&rows=100&facet=banking&facet=bonus&facet=status&facet=contract_name")
     Call<VelibObject> listStation();
 
 }

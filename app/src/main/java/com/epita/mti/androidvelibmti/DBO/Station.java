@@ -1,6 +1,7 @@
 package com.epita.mti.androidvelibmti.DBO;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * Created by William on 12/05/2017.
@@ -18,11 +19,12 @@ public class Station implements Serializable {
     private final String banking;
     private final Integer available_bikes;
     private final String address;
+    private final ArrayList<Double> position;
 
     public Station(String status, String contract_name, String name, String bonus,
                    Integer bike_stands, Integer number, String last_update,
                    Integer available_bike_stands, String banking, Integer available_bikes,
-                   String address) {
+                   String address, ArrayList<Double> position) {
         this.status = status;
         this.contract_name = contract_name;
         this.name = name;
@@ -34,6 +36,7 @@ public class Station implements Serializable {
         this.banking = banking;
         this.available_bikes = available_bikes;
         this.address = address;
+        this.position = position;
     }
 
     public String getStatus() {
@@ -80,4 +83,7 @@ public class Station implements Serializable {
         return address;
     }
 
+    public ArrayList<Double> getPosition() {
+        return position;
+    }
 }
