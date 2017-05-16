@@ -7,14 +7,16 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.epita.mti.androidvelibmti.Adapter.VelibAdapter;
 import com.epita.mti.androidvelibmti.Authors.AuthorsActivity;
+import com.epita.mti.androidvelibmti.DBO.Station;
+import com.epita.mti.androidvelibmti.DBO.StationInfo;
+import com.epita.mti.androidvelibmti.DBO.VelibObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private VelibAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private ArrayList<String> strings = new ArrayList<String>();
+    private ArrayList<Station> strings = new ArrayList<Station>();
 
     Toolbar toolbar;
 
@@ -58,16 +60,14 @@ public class MainActivity extends AppCompatActivity {
                     VelibObject repoList = response.body();
 
                     for (StationInfo tuto : repoList.getRecords()) {
-                        strings.add(tuto.getFields().getName());
+                        strings.add(tuto.getFields());
                     }
                     mAdapter.notifyDataSetChanged();
                 } else {
-                    Log.d("HADRIEN", "error");
                 }
             }
             @Override
             public void onFailure(Call<VelibObject> call, Throwable t) {
-                Log.d("HADRIEN", "error");
             }
         });
 

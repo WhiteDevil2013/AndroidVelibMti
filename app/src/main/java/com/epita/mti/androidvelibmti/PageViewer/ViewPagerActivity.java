@@ -13,8 +13,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.epita.mti.androidvelibmti.Authors.AuthorsActivity;
+import com.epita.mti.androidvelibmti.DBO.Station;
 import com.epita.mti.androidvelibmti.MainActivity;
 import com.epita.mti.androidvelibmti.R;
+import com.epita.mti.androidvelibmti.Wrapper.StationWrapper;
+
+import java.util.ArrayList;
 
 /**
  * Created by hadri on 13/05/2017.
@@ -23,23 +27,33 @@ import com.epita.mti.androidvelibmti.R;
 public class ViewPagerActivity extends AppCompatActivity {
 
 
-    private static final int NUM_PAGES = 5;
+    private int NUM_PAGES = 5;
     private ViewPager mPager;
     private PagerAdapter mPagerAdapter;
 
     Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_pager);
 
+
+        // INIT TOOLBAR
+        initToolBar();
+
+        // RETREIVE DATAS
+        StationWrapper dw = (StationWrapper) getIntent().getSerializableExtra("DATA");
+        ArrayList<Station> stations = dw.getstations();
+        this.NUM_PAGES = stations.size();
+        int CurrentPosition = getIntent().getIntExtra("POSITION", 0);
+
         // Instantiate a ViewPager and a PagerAdapter.
         mPager = (ViewPager) findViewById(R.id.container);
         mPager.setPageTransformer(true, new ZoomOutPageTransformer());
-        mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
+        mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager(), stations);
         mPager.setAdapter(mPagerAdapter);
-
-        initToolBar();
+        mPager.setCurrentItem(CurrentPosition);
     }
 
     public void initToolBar() {
@@ -91,13 +105,17 @@ public class ViewPagerActivity extends AppCompatActivity {
      */
     private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
 
-        public ScreenSlidePagerAdapter(FragmentManager fm) {
+        private ArrayList<Station> stations;
+
+        public ScreenSlidePagerAdapter(FragmentManager fm, ArrayList<Station> stations)
+        {
             super(fm);
+            this.stations = stations;
         }
 
         @Override
         public Fragment getItem(int position) {
-            return PlaceholderFragment.create(position);
+            return PlaceholderFragment.create(stations.get(position));
         }
 
         @Override

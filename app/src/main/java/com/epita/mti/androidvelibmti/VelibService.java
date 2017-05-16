@@ -1,6 +1,6 @@
 package com.epita.mti.androidvelibmti;
 
-import java.util.List;
+import com.epita.mti.androidvelibmti.DBO.VelibObject;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

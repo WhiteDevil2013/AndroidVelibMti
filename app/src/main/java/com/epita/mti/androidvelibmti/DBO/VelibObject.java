@@ -1,4 +1,6 @@
-package com.epita.mti.androidvelibmti;
+package com.epita.mti.androidvelibmti.DBO;
+
+import com.epita.mti.androidvelibmti.DBO.StationInfo;
 
 import java.util.List;
 

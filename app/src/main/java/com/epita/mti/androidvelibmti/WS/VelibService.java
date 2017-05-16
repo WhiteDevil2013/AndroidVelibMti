@@ -3,7 +3,6 @@ package com.epita.mti.androidvelibmti.WS;
 import com.epita.mti.androidvelibmti.DBO.Station;
 
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.http.GET;
 
@@ -16,5 +15,4 @@ public interface VelibService {
 
     @GET("MTI/2018/TP3.json")
     Call<List<Station>> listStation();
-
 }

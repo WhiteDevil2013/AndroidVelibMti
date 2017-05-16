@@ -1,4 +1,4 @@
-package com.epita.mti.androidvelibmti;
+package com.epita.mti.androidvelibmti.DBO;
 
 /**
  * Created by hadri on 15/05/2017.

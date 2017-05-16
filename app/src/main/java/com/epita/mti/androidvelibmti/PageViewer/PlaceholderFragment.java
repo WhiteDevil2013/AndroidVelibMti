@@ -7,22 +7,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.epita.mti.androidvelibmti.DBO.Station;
 import com.epita.mti.androidvelibmti.R;
+
+import java.util.ArrayList;
 
 /**
  * Created by hadri on 13/05/2017.
  */
 
 public class PlaceholderFragment extends Fragment {
-    public static final String ARG_PAGE = "page";
-    private int mPageNumber;
+    public static final String ARG_PAGE = "STATION_ID";
+    private Station mStation;
 
     TextView mTextView;
 
-    public static PlaceholderFragment create(int pageNumber) {
+    public static PlaceholderFragment create(Station station) {
         PlaceholderFragment fragment = new PlaceholderFragment();
         Bundle args = new Bundle();
-        args.putInt(ARG_PAGE, pageNumber);
+        args.putSerializable(ARG_PAGE, station);
         fragment.setArguments(args);
         return fragment;
     }
@@ -33,7 +36,7 @@ public class PlaceholderFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPageNumber = getArguments().getInt(ARG_PAGE);
+        mStation = (Station) getArguments().getSerializable(ARG_PAGE);
     }
 
     @Override
@@ -45,7 +48,7 @@ public class PlaceholderFragment extends Fragment {
 
         mTextView = (TextView)rootView.findViewById(R.id.section_label);
 
-        mTextView.setText(String.valueOf(mPageNumber));
+        mTextView.setText(String.valueOf(mStation.getName()));
         return rootView;
     }
 
