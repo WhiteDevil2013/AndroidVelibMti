@@ -9,6 +9,8 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import com.epita.mti.androidvelibmti.Adapter.VelibAdapter;
 import com.epita.mti.androidvelibmti.Authors.AuthorsActivity;
@@ -32,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Station> strings = new ArrayList<Station>();
 
     Toolbar toolbar;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        progressBar = (ProgressBar) findViewById(R.id.progress_bar);
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
@@ -63,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
                         strings.add(tuto.getFields());
                     }
                     mAdapter.notifyDataSetChanged();
+                    progressBar.setVisibility(View.GONE);
                 } else {
                 }
             }

@@ -75,8 +75,6 @@ public class ViewPagerActivity extends AppCompatActivity {
             case R.id.authors:
                 showAuthors();
                 break;
-            case R.id.share:
-                break;
         }
         return true;
     }
