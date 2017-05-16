@@ -1,6 +1,8 @@
 package com.epita.mti.androidvelibmti;
 
 import android.content.Intent;
+import android.os.Handler;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.ProgressBar;
 
 import com.epita.mti.androidvelibmti.Adapter.VelibAdapter;
@@ -32,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private VelibAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private ArrayList<Station> strings = new ArrayList<Station>();
+    private SwipeRefreshLayout mSwipeRefreshLayout;
 
     Toolbar toolbar;
     ProgressBar progressBar;
@@ -41,8 +45,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        VelibService velibService = buildService();
+        final VelibService velibService = buildService();
 
+        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.activity_main_swipe_refresh_layout);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                strings = new ArrayList<Station>();
+                mSwipeRefreshLayout.setRefreshing(true);
+                refreshContent(velibService);
+                mSwipeRefreshLayout.setRefreshing(false);
+            }
+        });
+        
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -51,31 +66,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
 
-        mLayoutManager = new LinearLayoutManager(getApplicationContext());
-        recyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new VelibAdapter(strings);
-        recyclerView.setAdapter(mAdapter);
-
-        Call<VelibObject> repoList = velibService.listStation();
-        repoList.enqueue(new Callback<VelibObject>() {
-            @Override
-            public void onResponse(Call<VelibObject> call, Response<VelibObject> response) {
-                if(response.isSuccessful()) {
-                    VelibObject repoList = response.body();
-
-                    for (StationInfo tuto : repoList.getRecords()) {
-                        strings.add(tuto.getFields());
-                    }
-                    mAdapter.notifyDataSetChanged();
-                    progressBar.setVisibility(View.GONE);
-                } else {
-                }
-            }
-            @Override
-            public void onFailure(Call<VelibObject> call, Throwable t) {
-            }
-        });
-
+        refreshContent(velibService);
 
         initToolBar();
     }
@@ -124,8 +115,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    private VelibService buildService()
-    {
+    private VelibService buildService() {
         Retrofit retrofit =
                 new Retrofit.Builder().baseUrl(VelibService.ENDPOINT).
                         addConverterFactory(GsonConverterFactory.create()).build();
@@ -133,9 +123,39 @@ public class MainActivity extends AppCompatActivity {
         return velibService;
     }
 
-    public void showAuthors()
-    {
+    public void showAuthors() {
         Intent intent = new Intent(MainActivity.this, AuthorsActivity.class);
         startActivity(intent);
+    }
+
+    private void refreshContent(final VelibService velibService) {
+
+        new Handler().postDelayed(new Runnable() {
+            @Override public void run() {
+                mLayoutManager = new LinearLayoutManager(getApplicationContext());
+                recyclerView.setLayoutManager(mLayoutManager);
+                mAdapter = new VelibAdapter(strings);
+                recyclerView.setAdapter(mAdapter);
+                Call<VelibObject> repoList = velibService.listStation();
+                repoList.enqueue(new Callback<VelibObject>() {
+                    @Override
+                    public void onResponse(Call<VelibObject> call, Response<VelibObject> response) {
+                        if (response.isSuccessful()) {
+                            VelibObject repoList = response.body();
+
+                            for (StationInfo tuto : repoList.getRecords()) {
+                                strings.add(tuto.getFields());
+                            }
+                            mAdapter.notifyDataSetChanged();
+                            progressBar.setVisibility(View.GONE);
+                        } else {
+                        }
+                    }
+                    @Override
+                    public void onFailure(Call<VelibObject> call, Throwable t) {
+                    }
+                });
+            }
+        }, 0);
     }
 }
