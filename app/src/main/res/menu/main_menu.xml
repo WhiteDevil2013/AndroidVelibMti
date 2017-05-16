@@ -14,10 +14,4 @@
         app:showAsAction="ifRoom"
         android:title="Refresh"/>
 
-    <item
-        android:id="@+id/mapViewer"
-        android:icon="@android:drawable/ic_menu_mapmode"
-        app:showAsAction="ifRoom"
-        android:title="Map"/>
-
 </menu>
