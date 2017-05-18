@@ -1,8 +1,13 @@
 package com.epita.mti.androidvelibmti;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -45,6 +50,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        initToolBar();
+
+
         final VelibService velibService = buildService();
 
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.activity_main_swipe_refresh_layout);
@@ -66,9 +75,8 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
 
-        refreshContent(velibService);
 
-        initToolBar();
+        refreshContent(velibService);
     }
 
 
@@ -129,7 +137,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void refreshContent(final VelibService velibService) {
-
+        ConnectivityManager connMgr = (ConnectivityManager)
+                getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        if (!(networkInfo != null && networkInfo.isConnected())) {
+            AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+            alertDialog.setTitle("Alert");
+            alertDialog.setMessage("You must be connected to internet to get informations about the bikes");
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            alertDialog.show();
+            return;
+        }
         new Handler().postDelayed(new Runnable() {
             @Override public void run() {
                 mLayoutManager = new LinearLayoutManager(getApplicationContext());

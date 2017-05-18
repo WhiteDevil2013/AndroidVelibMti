@@ -43,7 +43,6 @@ public class MapsActivity extends AppCompatActivity
         //INIT TOOLBAR
         initToolBar();
 
-
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -69,7 +68,6 @@ public class MapsActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.detail_menu, menu);
-
 
         return true;
     }

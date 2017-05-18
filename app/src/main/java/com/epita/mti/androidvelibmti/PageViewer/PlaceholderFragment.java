@@ -1,9 +1,14 @@
 package com.epita.mti.androidvelibmti.PageViewer;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -128,14 +133,29 @@ public class PlaceholderFragment extends Fragment {
         return rootView;
     }
 
-
-
     public void showMap(Double latitude, Double longitude, String Name) {
+        ConnectivityManager connMgr = (ConnectivityManager)
+                getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        if (!(networkInfo != null && networkInfo.isConnected())) {
+            AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
+            alertDialog.setTitle("Alert");
+            alertDialog.setMessage("You must be connected to internet to see the map");
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            alertDialog.show();
+            return;
+        }
         Intent intent = new Intent(getActivity(), MapsActivity.class);
         intent.putExtra("LATITUDE", latitude);
         intent.putExtra("LONGITUDE", longitude);
         intent.putExtra("NAME", Name);
         startActivity(intent);
+
     }
 
 }

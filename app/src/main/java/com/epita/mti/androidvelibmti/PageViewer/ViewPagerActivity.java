@@ -31,13 +31,15 @@ public class ViewPagerActivity extends AppCompatActivity {
     private ViewPager mPager;
     private PagerAdapter mPagerAdapter;
 
+
+    private String name;
+
     Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_pager);
-
 
         // INIT TOOLBAR
         initToolBar();
@@ -75,8 +77,18 @@ public class ViewPagerActivity extends AppCompatActivity {
             case R.id.authors:
                 showAuthors();
                 break;
+            case R.id.share:
+                shareIntent();
+                break;
         }
         return true;
+    }
+
+    public void shareIntent() {
+        Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+        sharingIntent.setType("text/*");
+        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, name);
+        startActivity(Intent.createChooser(sharingIntent, "Share using"));
     }
 
     @Override
@@ -106,6 +118,7 @@ public class ViewPagerActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
+            name = stations.get(position).getName();
             return PlaceholderFragment.create(stations.get(position));
         }
 
