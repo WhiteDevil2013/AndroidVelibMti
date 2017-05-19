@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_blue_dark"
+    android:background="@color/colorPrimaryNuanced"
     android:orientation="vertical">
 
     <TextView
@@ -31,7 +31,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
-        android:padding="40dp"
         android:gravity="center"
         android:orientation="vertical" >
 
@@ -39,6 +38,10 @@
             android:id="@+id/LocationPart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingStart="30dp"
+            android:paddingEnd="0dp"
+            android:paddingRight="0dp"
+            android:paddingLeft="0dp"
             android:orientation="horizontal">
 
             <ImageView
@@ -50,18 +53,30 @@
 
             <TextView
                 android:id="@+id/StationLocationText"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
+                android:layout_weight="1"
                 android:text="Label"
-                android:textColor="@android:color/white" />
+                android:textAlignment="center" />
+
+            <ImageView
+                android:id="@+id/goTo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="20dp"
+                app:srcCompat="@drawable/ic_chevron_right_black_24dp" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingStart="30dp"
+            android:paddingEnd="30dp"
+            android:paddingRight="30dp"
+            android:paddingLeft="30dp"
             android:orientation="horizontal">
 
             <ImageView
@@ -77,14 +92,17 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:text="Label"
-                android:textColor="@android:color/white" />
+                android:text="Label" />
 
             </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingStart="30dp"
+            android:paddingEnd="30dp"
+            android:paddingRight="30dp"
+            android:paddingLeft="30dp"
             android:orientation="horizontal">
 
             <ImageView
@@ -107,8 +125,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:text="Label"
-                android:textColor="@android:color/white" />
+                android:text="Label" />
 
             <TextView
                 android:id="@+id/bikeStatsTextTotal"
@@ -116,8 +133,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:text=" / Label"
-                android:textColor="@android:color/white" />
+                android:text=" / Label" />
 
                 </LinearLayout>
 

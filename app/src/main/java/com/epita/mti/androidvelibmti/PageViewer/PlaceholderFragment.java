@@ -8,6 +8,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.text.format.DateUtils;
 import android.view.LayoutInflater;
@@ -85,12 +86,12 @@ public class PlaceholderFragment extends Fragment {
         mTextViewName.setText(String.valueOf(mStation.getName()));
 
         if (mStation.getStatus().equals("CLOSED")) {
-            mTextViewStatus.setText("FERMER");
-            mTextViewStatus.setTextColor(Color.RED);
+            mTextViewStatus.setText(getString(R.string.close));
+            mTextViewStatus.setTextColor(ContextCompat.getColor(getContext(), R.color.colorClosed));
         }
         else {
-            mTextViewStatus.setText("OUVERT");
-            mTextViewStatus.setTextColor(Color.GREEN);
+            mTextViewStatus.setText(getString(R.string.open));
+            mTextViewStatus.setTextColor(ContextCompat.getColor(getContext(), R.color.colorOpened));
         }
 
         mTextViewLocation.setText(String.valueOf(mStation.getAddress()));
@@ -121,10 +122,12 @@ public class PlaceholderFragment extends Fragment {
 
         mTextViewBikeAvailable.setText(String.valueOf(mStation.getAvailable_bike_stands()));
         if (mStation.getAvailable_bike_stands() <= 0) {
-            mTextViewBikeAvailable.setTextColor(Color.RED);
+            mTextViewBikeAvailable.setTextColor(ContextCompat.getColor(getContext(),
+                    R.color.colorClosed));
         }
         else {
-            mTextViewBikeAvailable.setTextColor(Color.GREEN);
+            mTextViewBikeAvailable.setTextColor(ContextCompat.getColor(getContext(),
+                    R.color.colorOpened));
         }
         String TotalBikeText = " / " + String.valueOf(mStation.getBike_stands());
         mTextViewBikeTotal.setText(TotalBikeText);

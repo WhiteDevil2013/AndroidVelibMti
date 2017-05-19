@@ -2,5 +2,7 @@
     <string name="app_name">AndroidVelibMti</string>
     <string name="authors">Auteurs</string>
     <string name="authorTwo">William Wakim</string>
-    <string name="authorOne">Hadrien de Lamotte</string>
+    <string name="authorOne">Hadrien Paultre de Lamotte</string>
+    <string name="open">OUVERT</string>
+    <string name="close">FERMER</string>
 </resources>
