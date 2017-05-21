@@ -17,10 +17,6 @@ import com.epita.mti.androidvelibmti.Wrapper.StationWrapper;
 
 import java.util.ArrayList;
 
-/**
- * Created by William on 12/05/2017.
- */
-
 public class VelibAdapter extends RecyclerView.Adapter<VelibAdapter.ViewHolder> {
     private ArrayList<Station> mDataset;
     private ArrayList<Station> filteredData;

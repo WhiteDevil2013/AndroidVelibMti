@@ -5,10 +5,6 @@ import com.epita.mti.androidvelibmti.DBO.Station;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-/**
- * Created by hadri on 16/05/2017.
- */
-
 public class StationWrapper implements Serializable {
 
     private ArrayList<Station> stations;

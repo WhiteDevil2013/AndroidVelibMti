@@ -5,10 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.epita.mti.androidvelibmti.R;
 
-/**
- * Created by hadri on 13/05/2017.
- */
-
 public class AuthorsActivity extends AppCompatActivity {
 
     @Override

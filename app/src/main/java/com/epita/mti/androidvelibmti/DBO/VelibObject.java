@@ -1,12 +1,6 @@
 package com.epita.mti.androidvelibmti.DBO;
 
-import com.epita.mti.androidvelibmti.DBO.StationInfo;
-
 import java.util.List;
-
-/**
- * Created by hadri on 15/05/2017.
- */
 
 public class VelibObject {
     private final List<StationInfo> records;

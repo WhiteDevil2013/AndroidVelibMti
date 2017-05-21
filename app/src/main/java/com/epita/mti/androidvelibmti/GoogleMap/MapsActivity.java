@@ -1,8 +1,7 @@
-package com.epita.mti.androidvelibmti;
+package com.epita.mti.androidvelibmti.GoogleMap;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.ShareActionProvider;
 import android.support.v7.widget.Toolbar;
@@ -11,6 +10,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.epita.mti.androidvelibmti.Authors.AuthorsActivity;
+import com.epita.mti.androidvelibmti.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -33,7 +33,6 @@ public class MapsActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-
 
         // PARIS BY DEFAULT
         lat = getIntent().getDoubleExtra("LATITUDE", 48.8566);

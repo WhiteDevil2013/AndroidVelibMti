@@ -3,10 +3,6 @@ package com.epita.mti.androidvelibmti.DBO;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-/**
- * Created by William on 12/05/2017.
- */
-
 public class Station implements Serializable {
     private final String status;
     private final String contract_name;

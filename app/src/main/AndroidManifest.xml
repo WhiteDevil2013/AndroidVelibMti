@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Authors.AuthorsActivity"/>
-        <activity android:name=".MapsActivity" />
+        <activity android:name=".GoogleMap.MapsActivity" />
         <activity android:name=".PageViewer.ViewPagerActivity"/>
         <meta-data
             android:name="com.google.android.gms.version"

@@ -14,15 +14,10 @@ import android.view.MenuItem;
 
 import com.epita.mti.androidvelibmti.Authors.AuthorsActivity;
 import com.epita.mti.androidvelibmti.DBO.Station;
-import com.epita.mti.androidvelibmti.MainActivity;
 import com.epita.mti.androidvelibmti.R;
 import com.epita.mti.androidvelibmti.Wrapper.StationWrapper;
 
 import java.util.ArrayList;
-
-/**
- * Created by hadri on 13/05/2017.
- */
 
 public class ViewPagerActivity extends AppCompatActivity {
 

@@ -3,7 +3,6 @@ package com.epita.mti.androidvelibmti.PageViewer;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -18,18 +17,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.epita.mti.androidvelibmti.DBO.Station;
-import com.epita.mti.androidvelibmti.MainActivity;
-import com.epita.mti.androidvelibmti.MapsActivity;
+import com.epita.mti.androidvelibmti.GoogleMap.MapsActivity;
 import com.epita.mti.androidvelibmti.R;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.TimeZone;
-
-/**
- * Created by hadri on 13/05/2017.
- */
 
 public class PlaceholderFragment extends Fragment {
     public static final String ARG_PAGE = "STATION_ID";
