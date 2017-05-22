@@ -11,7 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Station name"
         android:textSize="30sp" />
 
     <TextView
@@ -19,8 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textSize="20sp"
-        android:text="Ouvert" />
+        android:textSize="20sp" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -58,7 +56,6 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:layout_weight="1"
-                android:text="Label"
                 android:textAlignment="center" />
 
             <ImageView
@@ -91,8 +88,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:gravity="center"
-                android:text="Label" />
+                android:gravity="center" />
 
             </LinearLayout>
 
@@ -110,7 +106,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="20dp"
-                app:srcCompat="@drawable/ic_directions_bike_black_24dp" />
+                app:srcCompat="@drawable/ic_directions_bike_black_24dp"
+                />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -124,16 +121,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:gravity="center"
-                android:text="Label" />
+                android:gravity="center" />
 
             <TextView
                 android:id="@+id/bikeStatsTextTotal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:gravity="center"
-                android:text=" / Label" />
+                android:gravity="center" />
 
                 </LinearLayout>
 
