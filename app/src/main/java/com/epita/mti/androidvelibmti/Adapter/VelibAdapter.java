@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +26,7 @@ public class VelibAdapter extends RecyclerView.Adapter<VelibAdapter.ViewHolder> 
     static class ViewHolder extends RecyclerView.ViewHolder {
         private TextView mTextView;
         private ImageView mImageView;
-        public ViewHolder(View v) {
+        private ViewHolder(View v) {
             super(v);
             context = itemView.getContext();
             mTextView = (TextView) v.findViewById(R.id.textTitle);
@@ -44,16 +45,19 @@ public class VelibAdapter extends RecyclerView.Adapter<VelibAdapter.ViewHolder> 
         return new ViewHolder(v);
     }
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
-        holder.mTextView.setText(filteredData.get(position).getName());
-        if (filteredData.get(position).getStatus().equals("CLOSED")) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
+        holder.mTextView.setText(filteredData.get(holder.getAdapterPosition()).getName());
+        if (filteredData.get(holder.getAdapterPosition()).getStatus().equals("CLOSED")) {
             holder.mImageView.setColorFilter(ContextCompat.getColor(context, R.color.colorAccent));
             holder.mImageView.setImageResource(R.drawable.ic_close_black_24dp);
+        } else {
+            holder.mImageView.setColorFilter(ContextCompat.getColor(context, R.color.colorOpened));
+            holder.mImageView.setImageResource(R.drawable.ic_done_black_24dp);
         }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDetail(position);
+                showDetail(holder.getAdapterPosition());
             }
         });
     }

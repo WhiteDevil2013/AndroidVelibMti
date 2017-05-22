@@ -110,9 +110,6 @@ public class PlaceholderFragment extends Fragment {
             mTextViewUpdateDate.setText(String.valueOf(mStation.getLast_update()));
         }
 
-
-
-
         mTextViewBikeAvailable.setText(String.valueOf(mStation.getAvailable_bike_stands()));
         if (mStation.getAvailable_bike_stands() <= 0) {
             mTextViewBikeAvailable.setTextColor(ContextCompat.getColor(getContext(),
