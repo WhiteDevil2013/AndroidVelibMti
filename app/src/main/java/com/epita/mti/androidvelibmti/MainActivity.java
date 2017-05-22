@@ -158,8 +158,8 @@ public class MainActivity extends AppCompatActivity {
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
         if (!(networkInfo != null && networkInfo.isConnected())) {
             AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-            alertDialog.setTitle("Alert");
-            alertDialog.setMessage("You must be connected to internet to get informations about the bikes");
+            alertDialog.setTitle("Warning");
+            alertDialog.setMessage(getString(R.string.ConnectionAlert));
             alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {

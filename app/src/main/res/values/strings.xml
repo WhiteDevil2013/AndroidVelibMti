@@ -5,5 +5,10 @@
     <string name="authorOne">Hadrien Paultre de Lamotte</string>
     <string name="open">OUVERT</string>
     <string name="close">FERMÉE</string>
-    <string name="NoBikeMsg">We couldn't fectch the bike list. please swipe down to refresh</string>
+    <string name="NoBikeMsg">
+        We couldn't fectch the bike list. please swipe down to refresh.
+    </string>
+    <string name="ConnectionAlert">
+        You must be connected to internet to get informations about the bikes
+    </string>
 </resources>
