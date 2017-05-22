@@ -10,6 +10,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -18,6 +19,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 
 import com.epita.mti.androidvelibmti.Adapter.VelibAdapter;
 import com.epita.mti.androidvelibmti.Authors.AuthorsActivity;
@@ -41,21 +43,31 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager mLayoutManager;
     private ArrayList<Station> stations = new ArrayList<Station>();
     private SwipeRefreshLayout mSwipeRefreshLayout;
+    private SwipeRefreshLayout mSwipeRefreshLayoutOnError;
 
     Toolbar toolbar;
-    ProgressBar progressBar;
+    RelativeLayout progressBarLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
+        
         initToolBar();
-
 
         final VelibService velibService = buildService();
 
+        mSwipeRefreshLayoutOnError = (SwipeRefreshLayout) findViewById(R.id.refreshOnNoBikeMessage);
+        mSwipeRefreshLayoutOnError.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                stations = new ArrayList<Station>();
+                mSwipeRefreshLayoutOnError.setRefreshing(true);
+                refreshContent(velibService);
+                mSwipeRefreshLayoutOnError.setRefreshing(false);
+            }
+        });
+        mSwipeRefreshLayoutOnError.setVisibility(View.GONE);
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.activity_main_swipe_refresh_layout);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -70,11 +82,13 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        progressBar = (ProgressBar) findViewById(R.id.progress_bar);
+        progressBarLayout = (RelativeLayout) findViewById(R.id.progress_barLayout);
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(),
+                DividerItemDecoration.VERTICAL) {
+        });
         recyclerView.setHasFixedSize(true);
-
 
         refreshContent(velibService);
     }
@@ -137,6 +151,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void refreshContent(final VelibService velibService) {
+        mSwipeRefreshLayoutOnError.setVisibility(View.GONE);
+        progressBarLayout.setVisibility(View.VISIBLE);
         ConnectivityManager connMgr = (ConnectivityManager)
                 getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
@@ -147,6 +163,8 @@ public class MainActivity extends AppCompatActivity {
             alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
+                            progressBarLayout.setVisibility(View.GONE);
+                            mSwipeRefreshLayoutOnError.setVisibility(View.VISIBLE);
                             dialog.dismiss();
                         }
                     });
@@ -170,12 +188,16 @@ public class MainActivity extends AppCompatActivity {
                                 stations.add(station.getFields());
                             }
                             mAdapter.notifyDataSetChanged();
-                            progressBar.setVisibility(View.GONE);
+                            progressBarLayout.setVisibility(View.GONE);
                         } else {
+                            progressBarLayout.setVisibility(View.GONE);
+                            mSwipeRefreshLayoutOnError.setVisibility(View.VISIBLE);
                         }
                     }
                     @Override
                     public void onFailure(Call<VelibObject> call, Throwable t) {
+                        progressBarLayout.setVisibility(View.GONE);
+                        mSwipeRefreshLayoutOnError.setVisibility(View.VISIBLE);
                     }
                 });
             }
