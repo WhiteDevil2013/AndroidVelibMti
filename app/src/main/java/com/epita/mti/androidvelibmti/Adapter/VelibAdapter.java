@@ -21,22 +21,22 @@ import java.util.ArrayList;
 public class VelibAdapter extends RecyclerView.Adapter<VelibAdapter.ViewHolder> {
     private ArrayList<Station> mDataset;
     private ArrayList<Station> filteredData;
-    private static Context context;
+    private Context context;
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         private TextView mTextView;
         private ImageView mImageView;
         private ViewHolder(View v) {
             super(v);
-            context = itemView.getContext();
             mTextView = (TextView) v.findViewById(R.id.textTitle);
             mImageView = (ImageView) v.findViewById(R.id.iconStatus);
         }
     }
 
-    public VelibAdapter(ArrayList<Station> myDataset) {
+    public VelibAdapter(ArrayList<Station> myDataset, Context context) {
         mDataset = myDataset;
         filteredData = myDataset;
+        this.context = context;
     }
 
     @Override

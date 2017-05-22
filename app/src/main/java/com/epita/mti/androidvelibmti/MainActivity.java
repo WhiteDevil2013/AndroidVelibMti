@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        
+
         initToolBar();
 
         final VelibService velibService = buildService();
@@ -175,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
             @Override public void run() {
                 mLayoutManager = new LinearLayoutManager(getApplicationContext());
                 recyclerView.setLayoutManager(mLayoutManager);
-                mAdapter = new VelibAdapter(stations);
+                mAdapter = new VelibAdapter(stations, MainActivity.this);
                 recyclerView.setAdapter(mAdapter);
                 Call<VelibObject> repoList = velibService.listStation();
                 repoList.enqueue(new Callback<VelibObject>() {
