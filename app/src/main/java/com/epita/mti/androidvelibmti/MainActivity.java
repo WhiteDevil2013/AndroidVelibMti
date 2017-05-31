@@ -3,6 +3,7 @@ package com.epita.mti.androidvelibmti;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Handler;
@@ -18,7 +19,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import com.epita.mti.androidvelibmti.Adapter.VelibAdapter;
@@ -36,7 +36,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SearchView.OnQueryTextListener{
 
     private RecyclerView recyclerView;
     private VelibAdapter mAdapter;
@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Station> stations = new ArrayList<Station>();
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private SwipeRefreshLayout mSwipeRefreshLayoutOnError;
+    private SearchView searchView;
 
     Toolbar toolbar;
     RelativeLayout progressBarLayout;
@@ -80,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitleTextColor(Color.WHITE);
         setSupportActionBar(toolbar);
 
         progressBarLayout = (RelativeLayout) findViewById(R.id.progress_barLayout);
@@ -105,24 +107,12 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.main_menu, menu);
         MenuItem searchItem = menu.findItem(R.id.action_search);
 
-        SearchView searchView = null;
+        searchView = null;
         if (searchItem != null) {
             searchView = (SearchView) searchItem.getActionView();
         }
         if (searchView != null) {
-            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-                @Override
-                public boolean onQueryTextSubmit(String query) {
-                    mAdapter.filter(query);
-                    return true;
-                }
-
-                @Override
-                public boolean onQueryTextChange(String newText) {
-                    mAdapter.filter(newText);
-                    return true;
-                }
-            });
+            searchView.setOnQueryTextListener(this);
         }
         return true;
     }
@@ -158,9 +148,9 @@ public class MainActivity extends AppCompatActivity {
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
         if (!(networkInfo != null && networkInfo.isConnected())) {
             AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-            alertDialog.setTitle("Warning");
+            alertDialog.setTitle(getString(R.string.warning));
             alertDialog.setMessage(getString(R.string.ConnectionAlert));
-            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, getString(R.string.ok),
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             progressBarLayout.setVisibility(View.GONE);
@@ -202,5 +192,18 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         }, 0);
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        mAdapter.filter(query);
+        searchView.clearFocus();
+        return true;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        mAdapter.filter(newText);
+        return true;
     }
 }

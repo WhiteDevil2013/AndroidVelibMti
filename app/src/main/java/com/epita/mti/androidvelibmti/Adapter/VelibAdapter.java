@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,7 +46,7 @@ public class VelibAdapter extends RecyclerView.Adapter<VelibAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.mTextView.setText(filteredData.get(holder.getAdapterPosition()).getName());
-        if (filteredData.get(holder.getAdapterPosition()).getStatus().equals("CLOSED")) {
+        if (filteredData.get(holder.getAdapterPosition()).getStatus().equals(context.getString(R.string.closed))) {
             holder.mImageView.setColorFilter(ContextCompat.getColor(context, R.color.colorAccent));
             holder.mImageView.setImageResource(R.drawable.ic_close_black_24dp);
         } else {
@@ -69,8 +68,8 @@ public class VelibAdapter extends RecyclerView.Adapter<VelibAdapter.ViewHolder> 
     public void showDetail(int position)
     {
         Intent intent = new Intent(context, ViewPagerActivity.class);
-        intent.putExtra("POSITION", position);
-        intent.putExtra("DATA", new StationWrapper(filteredData));
+        intent.putExtra(context.getString(R.string.position), position);
+        intent.putExtra(context.getString(R.string.data), new StationWrapper(filteredData));
         context.startActivity(intent);
     }
 
@@ -81,7 +80,7 @@ public class VelibAdapter extends RecyclerView.Adapter<VelibAdapter.ViewHolder> 
         } else{
             text = text.toLowerCase();
             for(Station item: mDataset){
-                if(item.getName().toLowerCase().contains(text)){
+                if(item.getAddress().toLowerCase().contains(text)){
                     tmpList.add(item);
                 }
             }

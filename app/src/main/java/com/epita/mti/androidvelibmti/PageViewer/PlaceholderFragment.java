@@ -78,7 +78,7 @@ public class PlaceholderFragment extends Fragment {
 
         mTextViewName.setText(String.valueOf(mStation.getName()));
 
-        if (mStation.getStatus().equals("CLOSED")) {
+        if (mStation.getStatus().equals(getString(R.string.closed))) {
             mTextViewStatus.setText(getString(R.string.close));
             mTextViewStatus.setTextColor(ContextCompat.getColor(getContext(), R.color.colorClosed));
         }
@@ -132,7 +132,7 @@ public class PlaceholderFragment extends Fragment {
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
         if (!(networkInfo != null && networkInfo.isConnected())) {
             AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
-            alertDialog.setTitle("Warning");
+            alertDialog.setTitle(getString(R.string.warning));
             alertDialog.setMessage(getString(R.string.ConnectionAlert));
             alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                     new DialogInterface.OnClickListener() {
@@ -144,9 +144,9 @@ public class PlaceholderFragment extends Fragment {
             return;
         }
         Intent intent = new Intent(getActivity(), MapsActivity.class);
-        intent.putExtra("LATITUDE", latitude);
-        intent.putExtra("LONGITUDE", longitude);
-        intent.putExtra("NAME", Name);
+        intent.putExtra(getString(R.string.latitude), latitude);
+        intent.putExtra(getString(R.string.longitude), longitude);
+        intent.putExtra(getString(R.string.name), Name);
         startActivity(intent);
 
     }

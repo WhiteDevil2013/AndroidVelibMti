@@ -13,7 +13,6 @@ public class Station implements Serializable {
     private final String last_update;
     private final Integer available_bike_stands;
     private final String banking;
-    private final Integer available_bikes;
     private final String address;
     private final ArrayList<Double> position;
 
@@ -30,7 +29,6 @@ public class Station implements Serializable {
         this.last_update = last_update;
         this.available_bike_stands = available_bike_stands;
         this.banking = banking;
-        this.available_bikes = available_bikes;
         this.address = address;
         this.position = position;
     }
@@ -69,10 +67,6 @@ public class Station implements Serializable {
 
     public String getBanking() {
         return banking;
-    }
-
-    public Integer getAvailable_bikes() {
-        return available_bikes;
     }
 
     public String getAddress() {

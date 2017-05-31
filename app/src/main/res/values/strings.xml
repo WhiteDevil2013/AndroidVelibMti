@@ -11,4 +11,13 @@
     <string name="ConnectionAlert">
         You must be connected to internet to get informations about the bikes
     </string>
+    <string name="warning">Warning</string>
+    <string name="ok">OK</string>
+    <string name="position">POSITION</string>
+    <string name="closed">CLOSED</string>
+    <string name="data">DATA</string>
+    <string name="latitude">LATITUDE</string>
+    <string name="longitude">LONGITUDE</string>
+    <string name="name">NAME</string>
+    <string name="shareTxt">Share using</string>
 </resources>

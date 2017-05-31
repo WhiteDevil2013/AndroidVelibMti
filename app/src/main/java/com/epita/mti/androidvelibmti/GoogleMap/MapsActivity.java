@@ -1,6 +1,7 @@
 package com.epita.mti.androidvelibmti.GoogleMap;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.ShareActionProvider;
@@ -35,9 +36,9 @@ public class MapsActivity extends AppCompatActivity
         setContentView(R.layout.activity_maps);
 
         // PARIS BY DEFAULT
-        lat = getIntent().getDoubleExtra("LATITUDE", 48.8566);
-        log = getIntent().getDoubleExtra("LONGITUDE", 2.3522);
-        name = getIntent().getStringExtra("NAME");
+        lat = getIntent().getDoubleExtra(getString(R.string.latitude), 48.8566);
+        log = getIntent().getDoubleExtra(getString(R.string.longitude), 2.3522);
+        name = getIntent().getStringExtra(getString(R.string.name));
 
         //INIT TOOLBAR
         initToolBar();
@@ -60,6 +61,7 @@ public class MapsActivity extends AppCompatActivity
 
     public void initToolBar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitleTextColor(Color.WHITE);
         setSupportActionBar(toolbar);
     }
 
@@ -95,7 +97,7 @@ public class MapsActivity extends AppCompatActivity
         Intent sharingIntent = new Intent(Intent.ACTION_SEND);
         sharingIntent.setType("text/*");
         sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, name);
-        startActivity(Intent.createChooser(sharingIntent, "Share using"));
+        startActivity(Intent.createChooser(sharingIntent, getString(R.string.shareTxt)));
     }
 
     @Override

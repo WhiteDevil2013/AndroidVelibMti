@@ -3,7 +3,8 @@
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <include layout="@layout/my_toolbar">
+    <include layout="@layout/my_toolbar"
+        android:id="@+id/toolbar">
 
     </include>
 
@@ -13,7 +14,10 @@
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context="com.epita.mti.androidvelibmti.GoogleMap.MapsActivity" />
+        tools:context="com.epita.mti.androidvelibmti.GoogleMap.MapsActivity"
+        android:layout_below="@+id/toolbar"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>
 
